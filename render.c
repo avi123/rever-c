@@ -1,6 +1,7 @@
 #include <stdio.h>
 #define WHITE ((((long int)1 << 9) + 1) << 27)
 #define BLACK ((((long int)1 << 7) + 1) << 28)
+#define ROWLENGTH 33
 
 void horizontalline(int charlength);
 void render(long int black, long int white);
@@ -12,7 +13,7 @@ int main() {
 void render(long int black, long int white) {
     int row,column;
 
-    horizontalline(33);
+    horizontalline(ROWLENGTH);
     for(row = 1; row <= 8; row++) {
         printf("|"); 
         for(column = 1; column <= 8; column++, black>>=1, white>>=1) {
@@ -24,7 +25,7 @@ void render(long int black, long int white) {
                 printf("   |");
         }
         printf("\n");
-        horizontalline(33);
+        horizontalline(ROWLENGTH);
     }
 }
 
