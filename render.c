@@ -3,11 +3,13 @@
 
 #define EMPTY ((long unsigned int)1 << 63) + 2
 #define EXIT ((long unsigned int)1 << 63) + 1
+#define VALID ((long unsigned int)1 << 63) + 4
 #define INIT_WHITE ((((long unsigned int)1 << 9) + 1) << 27)
 #define INIT_BLACK ((((long unsigned int)1 << 7) + 1) << 28)
 #define ROWLENGTH 33
 
 enum currentcolor { BLACK, WHITE };
+long unsigned int getadjacent(long unsigned int board);
 long unsigned int getempty(long unsigned int black, long unsigned int white);
 long unsigned int getmove();
 int highestbit();
@@ -35,6 +37,9 @@ int main() {
                 break; 
             case EXIT:
                 return;
+            case VALID:
+                render(getadjacent(currentcolor == BLACK ? whiteboard : blackboard),0);
+                break;
             case 0:
                 printf("Invalid Entry\n");
                 break;
@@ -44,6 +49,10 @@ int main() {
         }
         render(blackboard,whiteboard);
     }        
+}
+
+long unsigned int getadjacent(long unsigned int board) {
+    return ((board << 1) | (board >> 1) | (board << 8) | (board >> 8) | (board << 7) | (board >> 7) | (board << 9) | (board >> 9)) ^ board;
 }
 
 long unsigned int getempty(long unsigned int black, long unsigned int white) {
@@ -67,8 +76,11 @@ long unsigned int getmove() {
 
     x = move[0] - '0';
     y = move[2] - '0';
-   
-    if(strcmp(move,"EMPTY")==0) {
+  
+    if(strcmp(move,"VALID")==0) {
+        return VALID;
+    }
+    else if(strcmp(move,"EMPTY")==0) {
         return EMPTY; 
     } 
     else if(strcmp(move,"EXIT")==0) {
