@@ -47,6 +47,9 @@ long unsigned int getmove() {
     else if(strcmp(move,"EXIT")==0) {
         return EXIT;
     }
+    else if(strcmp(move,"EDGE")==0) {
+        return EDGE;
+    }    
     else if((x > 0) && (x < 9) && (y > 0) && (y < 9) && (move[1] == ',')) {
         return ((long int)1 << (x - 1 + (y - 1) * 8)); 
     }

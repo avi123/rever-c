@@ -2,6 +2,7 @@
 #include <string.h>
 #include "renderfunctions.h"
 
+/*
 #define EMPTY ((long unsigned int)1 << 63) + 2
 #define EXIT ((long unsigned int)1 << 63) + 1
 #define VALID ((long unsigned int)1 << 63) + 4
@@ -9,6 +10,7 @@
 #define INIT_BLACK ((((long unsigned int)1 << 7) + 1) << 28)
 #define MAXMOVES 64
 #define ROWLENGTH 33
+*/
 
 int main() {
     if(highestbit() < 64) {
@@ -29,6 +31,9 @@ int main() {
         int numofpossiblemoves;
 
         switch(move = getmove()) {
+            case EDGE:
+                render(EDGE_TOP | EDGE_BOTTOM | EDGE_LEFT | EDGE_RIGHT,0);
+                break;
             case EMPTY:
                 render(getempty(blackboard,whiteboard),0);
                 break; 

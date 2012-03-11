@@ -1,9 +1,16 @@
 #include <stdio.h>
 #include <string.h>
 
-#define EMPTY ((long unsigned int)1 << 63) + 2
+
+#define EDGE_TOP ((long unsigned int)1 << 8) - 1
+#define EDGE_BOTTOM (((long unsigned int)1 << 8) - 1) << 56
+#define EDGE_LEFT ((long unsigned int)1 << 56) + ((long unsigned int)1 << 48) + ((long unsigned int)1 << 40) + ((long unsigned int)1 << 32) + ((long unsigned int)1 << 24) + ((long unsigned int)1 << 16) + ((long unsigned int)1 << 8) + (long unsigned int)1 
+#define EDGE_RIGHT EDGE_LEFT << 7
+
 #define EXIT ((long unsigned int)1 << 63) + 1
+#define EMPTY ((long unsigned int)1 << 63) + 2
 #define VALID ((long unsigned int)1 << 63) + 4
+#define EDGE ((long unsigned int)1 << 63) + 8
 #define INIT_WHITE ((((long unsigned int)1 << 9) + 1) << 27)
 #define INIT_BLACK ((((long unsigned int)1 << 7) + 1) << 28)
 #define MAXMOVES 64
