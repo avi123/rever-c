@@ -1,6 +1,8 @@
+#ifndef HRENDERFUNCTIONS
+#define HRENDERFUNCTIONS
+
 #include <stdio.h>
 #include <string.h>
-
 
 #define EDGE_TOP ((long unsigned int)1 << 8) - 1
 #define EDGE_BOTTOM (((long unsigned int)1 << 8) - 1) << 56
@@ -16,6 +18,8 @@
 #define MAXMOVES 64
 #define ROWLENGTH 33
 
+const int DIRECTIONS[] = { -9,-8,-7,-1,1,7,8,9 };
+
 enum currentcolor { BLACK, WHITE };
 
 /* breaks bitboard down into array of individual spaces */
@@ -23,6 +27,9 @@ void decompose(long unsigned int moves,long unsigned int decomposedmoves[]);
 
 /* return a bitboard of adjacent spaces to bitboard */
 long unsigned int getadjacent(long unsigned int board);
+
+/* return the bitshift number to move origin to destination, >> is represented as negative */
+int getdirection(long unsigned int origin, long unsigned int destination);
 
 /* return a bitboard of empty spaces */
 long unsigned int getempty(long unsigned int black, long unsigned int white);
@@ -41,3 +48,5 @@ void horizontalline(int charlength);
 
 /* render the current board, or a map of moves, if only black is specified */
 void render(long unsigned int black, long unsigned int white);
+
+#endif

@@ -16,6 +16,15 @@ long unsigned int getadjacent(long unsigned int board) {
     return ((board << 1) | (board >> 1) | (board << 8) | (board >> 8) | (board << 7) | (board >> 7) | (board << 9) | (board >> 9)) ^ board;
 }
 
+int getdirection(long unsigned int origin, long unsigned int destination) {
+    int i;
+    for(i=0;i<8;i++) {
+        if((DIRECTIONS[i] > 0 && ((origin << DIRECTIONS[i]) & destination)) || (DIRECTIONS[i] < 0 && ((origin >> (-1 * DIRECTIONS[i])) & destination))) {
+            return DIRECTIONS[i];
+        }
+    }
+}
+
 long unsigned int getempty(long unsigned int black, long unsigned int white) {
     return ~(black|white);
 }

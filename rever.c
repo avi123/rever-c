@@ -29,6 +29,7 @@ int main() {
     {
         long unsigned int possiblemoves,possiblemovesdecomposed[MAXMOVES];
         int numofpossiblemoves;
+        int i;
 
         switch(move = getmove()) {
             case EDGE:
@@ -47,7 +48,6 @@ int main() {
                 printf("Number of Possible Moves: %i\n",numofpossiblemoves);
                 decompose(possiblemoves,possiblemovesdecomposed);
 
-                int i;
                 for(i=0;i<numofpossiblemoves;i++) {
                     render(possiblemovesdecomposed[i],0);
                 }
@@ -56,6 +56,17 @@ int main() {
                 printf("Invalid Entry\n");
                 break;
             default:
+                possiblemoves = getadjacent(move) & (currentcolor == BLACK ? whiteboard : blackboard);
+                render(possiblemoves,0);
+                numofpossiblemoves = numofmoves(possiblemoves);
+
+                printf("Number of Possible Directions: %i\n",numofpossiblemoves);
+                decompose(possiblemoves,possiblemovesdecomposed);
+
+                for(i=0;i<numofpossiblemoves;i++) {
+                    printf("Direction: %i\n",getdirection(move,possiblemovesdecomposed[i]));
+                    render(possiblemovesdecomposed[i],0);
+                }
                 currentcolor == BLACK ? (blackboard |= move) : (whiteboard |= move);
                 break;
         }
