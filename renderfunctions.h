@@ -1,8 +1,8 @@
-#ifndef HRENDERFUNCTIONS
-#define HRENDERFUNCTIONS
-
 #include <stdio.h>
 #include <string.h>
+
+#ifndef HRENDERFUNCTIONS
+#define HRENDERFUNCTIONS
 
 #define EDGE_TOP ((long unsigned int)1 << 8) - 1
 #define EDGE_BOTTOM (((long unsigned int)1 << 8) - 1) << 56
@@ -18,7 +18,7 @@
 #define MAXMOVES 64
 #define ROWLENGTH 33
 
-const int DIRECTIONS[] = { -9,-8,-7,-1,1,7,8,9 };
+//const int DIRECTIONS[] = { -9,-8,-7,-1,1,7,8,9 };
 
 enum currentcolor { BLACK, WHITE };
 

@@ -2,6 +2,8 @@
 #include <string.h>
 #include "renderfunctions.h"
 
+const int DIRECTIONS[] = { -9,-8,-7,-1,1,7,8,9 };
+
 void decompose(long unsigned int moves,long unsigned int decomposedmoves[]) {
     int i=0,j=0;
 
