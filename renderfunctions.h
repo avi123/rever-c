@@ -49,4 +49,8 @@ void horizontalline(int charlength);
 /* render the current board, or a map of moves, if only black is specified */
 void render(long unsigned int black, long unsigned int white);
 
+/* walk along a row of pieces to see if the move completes a line */
+int walk(long unsigned int move, long unsigned int myboard, long unsigned int opponentboard, int direction);
+
 #endif
+

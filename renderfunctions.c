@@ -3,6 +3,8 @@
 #include "renderfunctions.h"
 
 const int DIRECTIONS[] = { -9,-8,-7,-1,1,7,8,9 };
+static int walk_forward(long unsigned int move, long unsigned int myboard, long unsigned int opponentboard, unsigned int direction); 
+static int walk_backward(long unsigned int move, long unsigned int myboard, long unsigned int opponentboard, unsigned int direction); 
 
 void decompose(long unsigned int moves,long unsigned int decomposedmoves[]) {
     int i=0,j=0;
@@ -116,4 +118,40 @@ int numofmoves(long unsigned int moves) {
     }
 
     return i;
+}
+
+int walk(long unsigned int move, long unsigned int myboard, long unsigned int opponentboard, int direction) {
+    return direction > 0 ? walk_forward(move, myboard, opponentboard, direction) : walk_backward(move, myboard, opponentboard, -1*direction);
+}
+
+static int walk_forward(long unsigned int move, long unsigned int myboard, long unsigned int opponentboard, unsigned int direction) {
+    /* shift move by direction */
+    move <<= direction;
+
+    /* if my color, return true */
+    if(myboard & move)
+        return 1;
+
+    /* if empty or opposite color and edge, return false */
+    if(!(opponentboard & move))
+        return 0;
+
+    /* otherwise, call walk_forward recursively */
+    return walk_forward(move,myboard,opponentboard,direction);
+}
+
+static int walk_backward(long unsigned int move, long unsigned int myboard, long unsigned int opponentboard, unsigned int direction) {
+    /* shift move by direction */
+    move >>= direction;
+
+    /* if my color, return true */
+    if(myboard & move)
+        return 1;
+
+    /* if empty or opposite color and edge, return false */
+    if(!(opponentboard & move))
+        return 0;
+
+    /* otherwise, call walk_forward recursively */
+    return walk_backward(move,myboard,opponentboard,direction);
 }
